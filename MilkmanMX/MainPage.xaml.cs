@@ -25,15 +25,36 @@ namespace MilkmanMX
 
         #region Task Lists Property
 
+        public static readonly DependencyProperty TaskListsProperty =
+               DependencyProperty.Register("TaskLists", typeof(ObservableCollection<TaskList>), typeof(MainPage), new PropertyMetadata(new ObservableCollection<TaskList>()));
+
         public ObservableCollection<TaskList> TaskLists
         {
             get { return (ObservableCollection<TaskList>)GetValue(TaskListsProperty); }
             set { SetValue(TaskListsProperty, value); }
         }
 
-        public static readonly DependencyProperty TaskListsProperty =
-               DependencyProperty.Register("TaskLists", typeof(ObservableCollection<TaskList>), typeof(MainPage),
-                   new PropertyMetadata(new ObservableCollection<TaskList>()));
+        #endregion
+
+        #region Task List Property
+
+        public static readonly DependencyProperty TaskListProperty =
+            DependencyProperty.Register("CurrentList", typeof(TaskList), typeof(MainPage), new PropertyMetadata(new TaskList()));
+
+        private TaskList CurrentList
+        {
+            get { return (TaskList)GetValue(TaskListProperty); }
+            set { SetValue(TaskListProperty, value); }
+        }
+
+        public static readonly DependencyProperty AllTasksProperty =
+               DependencyProperty.Register("AllTasks", typeof(ObservableCollection<Task>), typeof(MainPage), new PropertyMetadata(new ObservableCollection<Task>()));
+
+        public ObservableCollection<Task> AllTasks
+        {
+            get { return (ObservableCollection<Task>)GetValue(AllTasksProperty); }
+            set { SetValue(AllTasksProperty, value); }
+        }
 
         #endregion
 
@@ -102,6 +123,24 @@ namespace MilkmanMX
 
                     TaskLists = tempTaskLists;
                 }
+
+                // TODO: fix this
+                CurrentList = App.RtmClient.TaskLists.SingleOrDefault(l => l.Id == TaskLists.FirstOrDefault().Id);
+
+                var tempAllTasks = new SortableObservableCollection<Task>();
+
+                if (CurrentList.Tasks != null)
+                {
+                    foreach (Task t in CurrentList.Tasks)
+                    {
+                        if (t.IsCompleted == true ||
+                            t.IsDeleted == true) continue;
+
+                        tempAllTasks.Add(t);
+                    }
+                }
+
+                AllTasks = tempAllTasks;
             });
         }
 

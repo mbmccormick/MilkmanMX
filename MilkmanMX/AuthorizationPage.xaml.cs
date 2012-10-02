@@ -67,6 +67,8 @@ namespace MilkmanMX
                     // create timeline
                     App.RtmClient.GetOrStartTimeline((int timeline) =>
                     {
+                        App.SaveData();
+
                         SmartDispatcher.BeginInvoke(() =>
                         {
                             if (this.Frame.CanGoBack)
