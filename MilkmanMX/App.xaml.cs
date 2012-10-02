@@ -1,4 +1,4 @@
-﻿using IronCow;
+using IronCow;
 using IronCow.Rest;
 using MilkmanMX.Helpers;
 using System;
