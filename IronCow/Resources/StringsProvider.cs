@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Net;
 using System.Windows;
+using Windows.ApplicationModel.Resources;
 
 namespace IronCow.Resources
 {
     public class StringsProvider
     {
-        private readonly Strings _resources = new Strings();
+        private static ResourceLoader _resources = null;
 
-        public Strings Resources
+        public static string GetString(string key)
         {
-            get { return _resources; }
+            if (_resources == null)
+            {
+                _resources = new ResourceLoader("IronCow/Strings");
+            }
+
+            return _resources.GetString(key);
         } 
     }
 }

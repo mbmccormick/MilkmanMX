@@ -135,11 +135,11 @@ namespace IronCow
             get
             {
                 if (ActiveCount == 0)
-                    return Strings.NoTasks;
+                    return StringsProvider.GetString("NoTasks");
                 else if (ActiveCount == 1)
-                    return ActiveCount + " " + Strings.TaskSingle;
+                    return ActiveCount + " " + StringsProvider.GetString("TaskSingle");
                 else
-                    return ActiveCount + " " + Strings.TaskPlural;
+                    return ActiveCount + " " + StringsProvider.GetString("TaskPlural");
             }
         }
 

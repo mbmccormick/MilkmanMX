@@ -1,11 +1,11 @@
 ﻿using IronCow;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,7 +17,7 @@ using MilkmanMX.Helpers;
 
 namespace MilkmanMX
 {
-    public sealed partial class AuthorizationPage : MilkmanMX.Common.LayoutAwarePage
+    public sealed partial class AuthorizationPage : Page
     {
         #region Construction and Navigation
 
@@ -26,9 +26,11 @@ namespace MilkmanMX
         public AuthorizationPage()
         {
             this.InitializeComponent();
+
+            this.Loaded += AuthorizationPage_Loaded;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void AuthorizationPage_Loaded(object sender, RoutedEventArgs e)
         {
             StartAuth();
         }
@@ -69,6 +71,8 @@ namespace MilkmanMX
                         {
                             if (this.Frame.CanGoBack)
                             {
+                                MainPage.sReload = true;
+
                                 this.Frame.Navigate(typeof(MainPage));
                             }
                         });

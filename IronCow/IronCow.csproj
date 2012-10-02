@@ -99,13 +99,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <PRIResource Include="Resources\Strings.es-ES.resx" />
-    <PRIResource Include="Resources\Strings.it-IT.resx" />
-    <PRIResource Include="Resources\Strings.resx" />
-    <PRIResource Include="Resources\Strings.ru-RU.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Authentication.cs" />
     <Compile Include="AuthenticationPermissions.cs" />
     <Compile Include="Contact.cs" />
@@ -131,7 +124,6 @@
     <Compile Include="Request.cs" />
     <Compile Include="RequestCollection.cs" />
     <Compile Include="RequestManager.cs" />
-    <Compile Include="Resources\Strings.Designer.cs" />
     <Compile Include="Resources\StringsProvider.cs" />
     <Compile Include="ResponseError.cs" />
     <Compile Include="ResponseStatus.cs" />
@@ -197,6 +189,9 @@
     <Compile Include="UnsyncedScope.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserSettings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Resources\Strings.resw" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

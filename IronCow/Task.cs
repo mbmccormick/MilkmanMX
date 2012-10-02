@@ -544,7 +544,7 @@ namespace IronCow
                 {
                     if (DueDateTime.Value.Date == DateTime.Today && !HasDueTime)
                     {
-                        dueString += Strings.TodayLower;
+                        dueString += StringsProvider.GetString("TodayLower");
                     }
                     else if (HasDueTime && DueDateTime.Value.Date == DateTime.Today)
                     {
@@ -552,7 +552,7 @@ namespace IronCow
                     }
                     else if (DateTime.Today.AddDays(1) == DueDateTime.Value.Date)
                     {
-                        dueString += Strings.TomorrowLower;
+                        dueString += StringsProvider.GetString("TomorrowLower");
                     }
                     else if (DateTime.Today < DueDateTime.Value.Date && DateTime.Today.AddDays(6) >= DueDateTime.Value.Date)
                     {
@@ -574,7 +574,7 @@ namespace IronCow
         {
             get
             {
-                string dueString = Strings.Never;
+                string dueString = StringsProvider.GetString("Never");
 
                 if (DueDateTime.HasValue)
                 {
@@ -1352,31 +1352,31 @@ namespace IronCow
                         this.DueDateTime.Value.Date < DateTime.Now.Date)
                     {
                         if (this.HasDueTime)
-                            return Strings.Due + " " + this.LocalizedDueDate + " " + Strings.DueAt + " " + this.LocalizedDueTime;
+                            return StringsProvider.GetString("Due") + " " + this.LocalizedDueDate + " " + StringsProvider.GetString("DueAt") + " " + this.LocalizedDueTime;
                         else
-                            return Strings.Due + " " + this.LocalizedDueDate;
+                            return StringsProvider.GetString("Due") + " " + this.LocalizedDueDate;
                     }
                     else
                     {
                         if (this.DueDateTime.Value.Date == DateTime.Now.Date)
                         {
                             if (this.HasDueTime)
-                                return Strings.Due + " " + Strings.TodayLower + " " + Strings.DueAt + " " + this.LocalizedDueTime;
+                                return StringsProvider.GetString("Due") + " " + StringsProvider.GetString("TodayLower") + " " + StringsProvider.GetString("DueAt") + " " + this.LocalizedDueTime;
                             else
-                                return Strings.Due + " " + Strings.TodayLower;
+                                return StringsProvider.GetString("Due") + " " + StringsProvider.GetString("TodayLower");
                         }
                         else
                         {
                             if (this.HasDueTime)
-                                return Strings.Due + " " + this.DueString + " " + Strings.DueAt + " " + this.LocalizedDueTime;
+                                return StringsProvider.GetString("Due") + " " + this.DueString + " " + StringsProvider.GetString("DueAt") + " " + this.LocalizedDueTime;
                             else
-                                return Strings.Due + " " + this.DueString;
+                                return StringsProvider.GetString("Due") + " " + this.DueString;
                         }
                     }
                 }
                 else
                 {
-                    return Strings.NoDueDate;
+                    return StringsProvider.GetString("NoDueDate");
                 }
             }
         }
@@ -1391,31 +1391,31 @@ namespace IronCow
                         this.DueDateTime.Value.Date < DateTime.Now.Date)
                     {
                         if (this.HasDueTime)
-                            return Strings.Due + " " + this.LocalizedShortDueDate + " " + Strings.DueAt + " " + this.LocalizedDueTime;
+                            return StringsProvider.GetString("Due") + " " + this.LocalizedShortDueDate + " " + StringsProvider.GetString("DueAt") + " " + this.LocalizedDueTime;
                         else
-                            return Strings.Due + " " + this.LocalizedShortDueDate;
+                            return StringsProvider.GetString("Due") + " " + this.LocalizedShortDueDate;
                     }
                     else
                     {
                         if (this.DueDateTime.Value.Date == DateTime.Now.Date)
                         {
                             if (this.HasDueTime)
-                                return Strings.Due + " " + Strings.TodayLower + " " + Strings.DueAt + " " + this.LocalizedDueTime;
+                                return StringsProvider.GetString("Due") + " " + StringsProvider.GetString("TodayLower") + " " + StringsProvider.GetString("DueAt") + " " + this.LocalizedDueTime;
                             else
-                                return Strings.Due + " " + Strings.TodayLower;
+                                return StringsProvider.GetString("Due") + " " + StringsProvider.GetString("TodayLower");
                         }
                         else
                         {
                             if (this.HasDueTime)
-                                return Strings.Due + " " + this.DueString + " " + Strings.DueAt + " " + this.LocalizedDueTime;
+                                return StringsProvider.GetString("Due") + " " + this.DueString + " " + StringsProvider.GetString("DueAt") + " " + this.LocalizedDueTime;
                             else
-                                return Strings.Due + " " + this.DueString;
+                                return StringsProvider.GetString("Due") + " " + this.DueString;
                         }
                     }
                 }
                 else
                 {
-                    return Strings.NoDueDate;
+                    return StringsProvider.GetString("NoDueDate");
                 }
             }
         }
@@ -1462,9 +1462,9 @@ namespace IronCow
                 if (this.Postponed == 0)
                     return "";
                 else if (this.Postponed == 1)
-                    return this.Postponed + " " + Strings.TimeSingle;
+                    return this.Postponed + " " + StringsProvider.GetString("TimeSingle");
                 else
-                    return this.Postponed + " " + Strings.TimePlural;
+                    return this.Postponed + " " + StringsProvider.GetString("TimePlural");
             }
         }
 

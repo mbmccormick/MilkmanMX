@@ -5,9 +5,35 @@
     xmlns:local="using:MilkmanMX"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <Button x:Name="btnLogin" Content="Login" Click="btnLogin_Click" />
+    <Grid Style="{StaticResource LayoutRootStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="backButton" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="Milkman: Dashboard" Style="{StaticResource PageHeaderTextStyle}"/>
+        </Grid>
+
+        <StackPanel Grid.Row="1">
+            <ListBox Name="lstLists" Margin="0,0,-12,0" Height="600" ItemsSource="{Binding TaskLists}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Background="#0060BF" Width="173" Height="173" Margin="12,12,0,0">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource HeaderTextStyle}" Foreground="White" TextWrapping="Wrap" Margin="12,6,12,12" Height="106" />
+                            <TextBlock Text="{Binding CountString}" Style="{StaticResource BasicTextStyle}" Foreground="White" Margin="12,12,12,12" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
     </Grid>
 </Page>
