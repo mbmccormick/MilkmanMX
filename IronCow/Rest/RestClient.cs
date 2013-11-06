@@ -827,7 +827,7 @@ namespace IronCow.Rest
             }
             // Initialise the web request
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            // req.UserAgent = UserAgent;
+            // TODO: fix this - req.UserAgent = UserAgent;
 
             IAsyncResult res = (IAsyncResult)req.BeginGetResponse((IAsyncResult result) =>
             {

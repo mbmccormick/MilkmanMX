@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml;
 using IronCow.Rest;
 using IronCow.Resources;
-using Windows.UI.Xaml.Media;
 using Windows.UI;
 
 namespace IronCow
@@ -367,6 +368,7 @@ namespace IronCow
         {
             get
             {
+                if (Owner == null) return null;                
                 if (Owner.Locations == null) return null;
 
                 if (mLocation == null && mLocationId != RtmElement.UnsyncedId)
@@ -1390,32 +1392,26 @@ namespace IronCow
                     if (this.DueDateTime.Value.Date > DateTime.Now.AddDays(6).Date ||
                         this.DueDateTime.Value.Date < DateTime.Now.Date)
                     {
-                        if (this.HasDueTime)
-                            return StringsProvider.GetString("Due") + " " + this.LocalizedShortDueDate + " " + StringsProvider.GetString("DueAt") + " " + this.LocalizedDueTime;
-                        else
-                            return StringsProvider.GetString("Due") + " " + this.LocalizedShortDueDate;
+                        return this.LocalizedShortDueDate;
                     }
                     else
                     {
                         if (this.DueDateTime.Value.Date == DateTime.Now.Date)
                         {
                             if (this.HasDueTime)
-                                return StringsProvider.GetString("Due") + " " + StringsProvider.GetString("TodayLower") + " " + StringsProvider.GetString("DueAt") + " " + this.LocalizedDueTime;
+                                return this.LocalizedDueTime;
                             else
-                                return StringsProvider.GetString("Due") + " " + StringsProvider.GetString("TodayLower");
+                                return StringsProvider.GetString("Today");
                         }
                         else
                         {
-                            if (this.HasDueTime)
-                                return StringsProvider.GetString("Due") + " " + this.DueString + " " + StringsProvider.GetString("DueAt") + " " + this.LocalizedDueTime;
-                            else
-                                return StringsProvider.GetString("Due") + " " + this.DueString;
+                            return this.DueDateTime.Value.ToString("ddd");
                         }
                     }
                 }
                 else
                 {
-                    return StringsProvider.GetString("NoDueDate");
+                    return "";
                 }
             }
         }
@@ -1424,10 +1420,11 @@ namespace IronCow
         {
             get
             {
-                if (Owner.UserSettings.DateFormat == DateFormat.American)
-                    return this.DueDateTime.Value.ToString("dddd, MMMM d");
-                else
+                if (Owner.UserSettings != null &&
+                    Owner.UserSettings.DateFormat == DateFormat.European)
                     return this.DueDateTime.Value.ToString("dddd, d MMMM");
+                else
+                    return this.DueDateTime.Value.ToString("dddd, MMMM d");
             }
         }
 
@@ -1437,9 +1434,9 @@ namespace IronCow
             {
                 if (Owner.UserSettings != null &&
                     Owner.UserSettings.DateFormat == DateFormat.European)
-                    return this.DueDateTime.Value.ToString("d MMMM");
+                    return this.DueDateTime.Value.ToString("d MMM");
                 else
-                    return this.DueDateTime.Value.ToString("MMMM d");
+                    return this.DueDateTime.Value.ToString("MMM d");
             }
         }
 
@@ -1449,9 +1446,9 @@ namespace IronCow
             {
                 if (Owner.UserSettings != null &&
                     Owner.UserSettings.TimeFormat == TimeFormat.TwentyFourHours)
-                    return this.DueDateTime.Value.ToString("H:mm");
+                    return this.DueDateTime.Value.ToString("H:mm").ToLower();
                 else
-                    return this.DueDateTime.Value.ToString("h:mm tt");
+                    return this.DueDateTime.Value.ToString("h:mmt").ToLower();
             }
         }
 
@@ -1465,6 +1462,18 @@ namespace IronCow
                     return this.Postponed + " " + StringsProvider.GetString("TimeSingle");
                 else
                     return this.Postponed + " " + StringsProvider.GetString("TimePlural");
+            }
+        }
+
+        public string FriendlyTagsString
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(TagsString) == false)
+                {
+                    return "#" + TagsString.Replace(", ", " #");
+                }
+                return "";
             }
         }
 
@@ -1497,9 +1506,27 @@ namespace IronCow
             {
                 if (this.DueDateTime.HasValue &&
                     this.DueDateTime.Value.Date <= DateTime.Now.Date)
-                    return (SolidColorBrush)Owner.Resources["ApplicationForegroundThemeBrush"];
+                    return (SolidColorBrush)Owner.Resources["PhoneAccentBrush"];
                 else
-                    return (SolidColorBrush)Owner.Resources["ApplicationSecondaryForegroundThemeBrush"];
+                    if (Owner == null)
+                        return null;
+                    else
+                        return (SolidColorBrush)Owner.Resources["PhoneSubtleBrush"];
+            }
+        }
+
+        public SolidColorBrush ShortDueDateForegroundBrush
+        {
+            get
+            {
+                if (this.DueDateTime.HasValue &&
+                    this.DueDateTime.Value.Date <= DateTime.Now.Date)
+                    return (SolidColorBrush)Owner.Resources["PhoneAccentBrush"];
+                else
+                    if (Owner == null)
+                        return null;
+                    else
+                        return (SolidColorBrush)Owner.Resources["PhoneForegroundBrush"];
             }
         }
 
@@ -1514,7 +1541,32 @@ namespace IronCow
                 else if (this.Priority == TaskPriority.Three)
                     return new SolidColorBrush(Color.FromArgb(255, 53, 154, 255));
                 else
-                    return (SolidColorBrush)Owner.Resources["ApplicationForegroundThemeBrush"];
+                    if (Owner == null)
+                        return null;
+                    else
+                        return (SolidColorBrush)Owner.Resources["PhoneForegroundBrush"];
+            }
+        }
+
+        public Visibility HasNotesVisibility
+        {
+            get
+            {
+                if (this.Notes.Count > 0)
+                    return Windows.UI.Xaml.Visibility.Visible;
+                else
+                    return Windows.UI.Xaml.Visibility.Collapsed;
+            }
+        }
+
+        public Visibility HasRecurrenceVisibility
+        {
+            get
+            {
+                if (this.HasRecurrence == true)
+                    return Windows.UI.Xaml.Visibility.Visible;
+                else
+                    return Windows.UI.Xaml.Visibility.Collapsed;
             }
         }
     }

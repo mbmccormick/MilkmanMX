@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
 
-  <Identity Name="c79ad237-1515-41ee-a149-743ecab5a6ad"
-            Publisher="CN=Matt"
+  <Identity Name="49827e33-3505-440b-882d-2efc52fba88c"
+            Publisher="CN=mattmc"
             Version="1.0.0.0" />
 
   <Properties>
     <DisplayName>MilkmanMX</DisplayName>
-    <PublisherDisplayName>Matt</PublisherDisplayName>
+    <PublisherDisplayName>mattmc</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
   <Prerequisites>
-    <OSMinVersion>6.2.1</OSMinVersion>
-    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+    <OSMinVersion>6.3.0</OSMinVersion>
+    <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
   </Prerequisites>
 
   <Resources>
@@ -24,16 +24,15 @@
     <Application Id="App"
         Executable="$targetnametoken$.exe"
         EntryPoint="MilkmanMX.App">
-        <VisualElements
+        <m2:VisualElements
             DisplayName="MilkmanMX"
-            Logo="Assets\Logo.png"
-            SmallLogo="Assets\SmallLogo.png"
+            Square150x150Logo="Assets\Logo.png"
+            Square30x30Logo="Assets\SmallLogo.png"
             Description="MilkmanMX"
             ForegroundText="light"
             BackgroundColor="#464646">
-            <DefaultTile ShowName="allLogos" />
-            <SplashScreen Image="Assets\SplashScreen.png" />
-        </VisualElements>
+            <m2:SplashScreen Image="Assets\SplashScreen.png" />
+        </m2:VisualElements>
     </Application>
   </Applications>
   <Capabilities>

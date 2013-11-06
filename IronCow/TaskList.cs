@@ -261,9 +261,9 @@ namespace IronCow
         {
             TaskListTaskCollection tmp = new TaskListTaskCollection(this);
 
-            if (!GetFlag(TaskListFlags.Smart))
+            if (IsSmart == true)
             {
-                tmp.Resync(() =>
+                tmp.SmartResync(() =>
                 {
                     mTasks = tmp;
                     OnPropertyChanged("Tasks");
@@ -271,11 +271,9 @@ namespace IronCow
                     callback();
                 });
             }
-            else if (!IsFrozen && GetFlag(TaskListFlags.Smart))
+            else
             {
-                // Resync all the time for smart lists...
-                //TODO: maybe use cache like normal lists, but for only a short time?
-                tmp.SmartResync(() =>
+                tmp.Resync(() =>
                 {
                     mTasks = tmp;
                     OnPropertyChanged("Tasks");
