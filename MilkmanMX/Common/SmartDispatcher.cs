@@ -9,7 +9,7 @@ using System.Windows;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
-namespace MilkmanMX.Helpers
+namespace MilkmanMX.Common
 {
     /// <summary>
     /// A smart dispatcher system for routing actions to the user interface

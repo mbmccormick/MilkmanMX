@@ -20,7 +20,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Windows.Storage;
 
-namespace MilkmanMX.Helpers
+namespace MilkmanMX.Common
 {
     public static class IsolatedStorageHelper
     {
