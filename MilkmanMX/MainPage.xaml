@@ -9,13 +9,13 @@
     mc:Ignorable="d"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="#FFFFFFFF">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ListBox x:Name="lstTasks" ItemsSource="{Binding DashboardTasks}">
+        <ListBox x:Name="lstTasks" ItemsSource="{Binding DashboardTasks}" Background="Transparent">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -31,8 +31,8 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <TextBlock x:Name="txtDashboardLoading" Visibility="Visible" TextWrapping="Wrap" Text="Just a moment..." />
-        <TextBlock x:Name="txtDashboardEmpty" Visibility="Collapsed" TextWrapping="Wrap" Text="You have no incomplete tasks in this list! Woohoo!" />
+        <TextBlock x:Name="txtDashboardLoading" Visibility="Visible" TextWrapping="Wrap" Text="Just a moment..." Style="{StaticResource SubtitleTextBlockStyle}" Foreground="#FF0060BF" />
+        <TextBlock x:Name="txtDashboardEmpty" Visibility="Collapsed" TextWrapping="Wrap" Text="You have no incomplete tasks in this list! Woohoo!" Style="{StaticResource SubtitleTextBlockStyle}" Foreground="#FF0060BF" />
     </Grid>
 
 </Page>
