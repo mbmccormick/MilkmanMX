@@ -24,13 +24,13 @@ namespace MilkmanMX
 
         #region Dashboard Properties
 
-        public static readonly DependencyProperty DashboardTasksProperty =
-               DependencyProperty.Register("DashboardTasks", typeof(ObservableCollection<Task>), typeof(MainPage), new PropertyMetadata(new ObservableCollection<Task>()));
+        public static readonly DependencyProperty AllTasksProperty =
+               DependencyProperty.Register("AllTasks", typeof(ObservableCollection<Task>), typeof(MainPage), new PropertyMetadata(new ObservableCollection<Task>()));
 
-        public ObservableCollection<Task> DashboardTasks
+        public ObservableCollection<Task> AllTasks
         {
-            get { return (ObservableCollection<Task>)GetValue(DashboardTasksProperty); }
-            set { SetValue(DashboardTasksProperty, value); }
+            get { return (ObservableCollection<Task>)GetValue(AllTasksProperty); }
+            set { SetValue(AllTasksProperty, value); }
         }
 
         public static readonly DependencyProperty TaskListsProperty =
@@ -152,7 +152,7 @@ namespace MilkmanMX
 
                 if (App.RtmClient.TaskLists != null)
                 {
-                    var tempDashboardTasks = new SortableObservableCollection<Task>();
+                    var tempAllTasks = new SortableObservableCollection<Task>();
                     var tempTaskLists = new SortableObservableCollection<TaskList>();
                     var tempTaskTags = new SortableObservableCollection<TaskTag>();
 
@@ -169,7 +169,7 @@ namespace MilkmanMX
                                 if (t.DueDateTime.HasValue &&
                                     t.DueDateTime.Value.Date <= DateTime.Now.AddDays(1).Date)
                                 {
-                                    tempDashboardTasks.Add(t);
+                                    tempAllTasks.Add(t);
                                 }
                             }
                         }
@@ -180,7 +180,7 @@ namespace MilkmanMX
                             tempTaskLists.Add(l);
                     }
 
-                    //tempDashboardTasks.Sort(Task.CompareByDate);
+                    //tempAllTasks.Sort(Task.CompareByDate);
 
                     // insert the nearby list placeholder
                     TaskList nearby = new TaskList("Nearby");
@@ -195,7 +195,7 @@ namespace MilkmanMX
                         tempTaskTags.Add(data);
                     }
 
-                    DashboardTasks = tempDashboardTasks;
+                    AllTasks = tempAllTasks;
                     TaskLists = tempTaskLists;
                     TaskTags = tempTaskTags;
 

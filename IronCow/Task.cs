@@ -1523,7 +1523,7 @@ namespace IronCow
                     this.DueDateTime.Value.Date <= DateTime.Now.Date)
                     return new SolidColorBrush(Color.FromArgb(255, 53, 154, 255));
                 else
-                    return new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+                    return new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
             }
         }
 
@@ -1538,7 +1538,7 @@ namespace IronCow
                 else if (this.Priority == TaskPriority.Three)
                     return new SolidColorBrush(Color.FromArgb(255, 53, 154, 255));
                 else
-                    return new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+                    return new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
             }
         }
 
