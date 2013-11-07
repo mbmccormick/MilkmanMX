@@ -211,12 +211,10 @@ namespace MilkmanMX
 
         private void ToggleLoadingText()
         {
-            //SmartDispatcher.BeginInvoke(() =>
-            //{
-            //    this.txtDashboardLoading.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            //    this.txtListsLoading.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            //    this.txtTagsLoading.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            //});
+            SmartDispatcher.BeginInvoke(() =>
+            {
+                this.txtDashboardLoading.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            });
         }
 
         private void ToggleEmptyText()

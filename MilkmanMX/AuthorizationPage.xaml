@@ -10,14 +10,16 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="ContentPanel" Grid.Row="0" Margin="0">
             <WebView Name="webAuthorization" Grid.Row="0" FrameNavigationStarting="webAuthorization_FrameNavigationStarting" FrameNavigationCompleted="webAuthorization_FrameNavigationCompleted" />
         </Grid>
 
-        <Button x:Name="btnComplete" Content="Complete" Click="btnComplete_Click" />
-        <Button x:Name="btnRetry" Content="Retry" Click="btnRetry_Click" />
+        <Button x:Name="btnComplete" Grid.Row="1" Content="Complete" Click="btnComplete_Click" />
+        <Button x:Name="btnRetry" Grid.Row="2" Content="Retry" Click="btnRetry_Click" />
     </Grid>
 
 </Page>

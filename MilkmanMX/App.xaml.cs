@@ -106,7 +106,7 @@ namespace MilkmanMX
 
             if (rootFrame.Content == null)
             {
-                if (!rootFrame.Navigate(typeof(MainPage), args.Arguments))
+                if (!rootFrame.Navigate(typeof(WelcomePage), args.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }

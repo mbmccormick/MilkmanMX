@@ -23,29 +23,6 @@ namespace MilkmanMX.Controls
         public TaskItemControl()
         {
             InitializeComponent();
-
-            this.Loaded += TaskItemControl_Loaded;
-        }
-
-        private bool DarkThemeUsed()
-        {
-            return Visibility.Visible == (Visibility)Application.Current.Resources["PhoneDarkThemeVisibility"];
-        }
-
-        private void TaskItemControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            Task target = (Task)this.DataContext;
-
-            if (this.DarkThemeUsed() == true)
-            {
-                this.stkDark.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                this.stkLight.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            }
-            else
-            {
-                this.stkLight.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                this.stkDark.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            }
         }
     }
 }
